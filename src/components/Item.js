@@ -4,6 +4,9 @@ class Item extends React.Component {
     confirm = () => {
         this.props.delItem(this.props.item.index - 1)
     }
+    onChange = () => {
+        this.props.isCheckdChange(this.props.item.index - 1)
+    }
     render() {
         const item = this.props.item
         return (
@@ -11,12 +14,12 @@ class Item extends React.Component {
                 <Col>
                     <Space size='middle'>
                         <span>{item.index}</span>
-                        <span>{item.value}</span>
+                        <span style={item.isCheckd ? { textDecoration: 'line-through' } : {}}>{item.name}</span>
                     </Space>
                 </Col>
                 <Col>
                     <Space size='middle'>
-                        <Checkbox />
+                        <Checkbox onChange={this.onChange} />
                         <Popconfirm
                             title="确定要删除该条待办吗?"
                             onConfirm={this.confirm}
